@@ -1,0 +1,14 @@
+{
+  "name": "session01",
+  "version": "1.0.0",
+  "description": "files for session01",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christian Wahl",
+  "license": "ISC",
+  "dependencies": {
+    "yaml": "^1.10.0"
+  }
+}

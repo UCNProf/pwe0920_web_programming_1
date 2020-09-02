@@ -1,0 +1,9 @@
+project:
+  title: "The Project"
+  description: |
+    The aime of the projekt is to make sure that
+    everyone understand the basic web technologies.
+  dates:
+  - 2019-08-01
+  - 2019-08-02
+  number: 12
