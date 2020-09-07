@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Items from my bag</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/javascript">
+			var imgtd, currentImg = 2;
+			var imgOp = 1;
+
+			function init(){
+				imgtd = document.getElementById("images");
+				imgtd.innerHTML = '<img width="100%" id="i2" src="images/item_2.jpg">';
+				imgtd.innerHTML += '<img width="100%" id="i1" src="images/item_1.jpg">';
+
+				setTimeout(function(){
+					setInterval(function(){
+						var tmpid = currentImg;
+						imgOp = 1;
+						currentImg = (currentImg < 8) ? currentImg+1 : 1;
+						imgtd.innerHTML = '<img width="100%" id="i'+currentImg+'" src="images/item_'+currentImg+'.jpg">';
+						imgtd.innerHTML += '<img width="100%" id="i'+tmpid+'" src="images/item_'+tmpid+'.jpg">';
+					}, 5000);
+
+					setInterval(function(){
+						imgOp = (imgOp < .01) ? 0 : imgOp-.01;
+						imgtd.lastChild.style.opacity = imgOp;
+					}, 10);
+				}, 5000);
+			}
+
+			function nav(page){
+				window.location.href = page;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<table width="850px" height="100%" align="center" bgcolor="white" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="2">
+					<a href="/"><img src="images/itemsfrommybag.png" width="728px" height="90px"></a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<div style="background-color: CornflowerBlue">
+						<table id="menu" align="center">
+							<tr>
+								<td></td>
+								<td onclick="nav('/')">Home</td>
+								<td onclick="nav('/')">Items</td>
+								<td onclick="nav('/')">Contact</td>
+								<td onclick="nav('/')">About</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr height="100%">
+				<td width="50%" id="iframecontent">
+					<iframe id="content" src="home.html" height="100%" width="100%" frameborder="0"></iframe>
+				</td>
+				<td width="50%" id="images">
+				</td>
+			</tr>
+			<tr>
+				<td id="contact" colspan="2">
+					<div style="position: relative; left: 50%; padding: 5px">
+						<div style="font-weight: bold">Contact info</div>
+						<div>Me Me Me</div>
+						<div>Old Gravel Road 99</div>
+						<div>9999 Fare out</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td id="footer" colspan="2">
+					<a href="">WebDesignCompany</a>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
