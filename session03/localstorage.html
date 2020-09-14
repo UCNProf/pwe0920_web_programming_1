@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Localstorage</title>
+		<meta charset="utf-8">
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', e => {
+				var textarea = document.forms.textform.text;
+
+				if(localStorage.text){
+					textarea.value = localStorage.text;
+				}
+
+				textarea.addEventListener('input', e => {
+					localStorage.text = e.target.value;
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form name="textform">
+			<textarea name="text"></textarea>
+		</form>
+	</body>
+</html>

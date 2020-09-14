@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Objects - items in my bag</title>
+		<meta charset="utf-8">
+		<script type="text/javascript">
+			var bagitems = [];
+			
+			var item1 = {desc: "HDMI cable", price: 99};
+			bagitems.push(item1);
+			var item2 = {desc: "Small mouse", price: 129};
+			bagitems.push(item2);
+
+			var priceSum = 0;
+			bagitems.forEach(item => {
+				console.log(item.desc);
+				priceSum += item.price;
+			});
+			console.log("Avg.:" + priceSum/bagitems.length);
+
+			/************ Start all over ******************/
+			bagitems = [];
+
+			var Item = function(desc, price){
+				this.desc = desc;
+				this.price = price;
+			};
+
+			Item.prototype.toString = function(){
+				return `${this.desc} costs ${this.price} kr.`;
+			};
+
+			item1 = new Item("HDMI cable", 99);
+			bagitems.push(item1);
+			item2 = new Item("Small mouse", 129);
+			bagitems.push(item2);
+			console.log(bagitems);
+
+			document.addEventListener('DOMContentLoaded', e => {
+				document.forms.itemform.addEventListener('submit', e => {
+					e.preventDefault();
+					var item = new Item(e.target.desc.value, parseInt(e.target.price.value));
+					bagitems.push(item);
+					console.log(bagitems.length);
+				});
+			});
+
+		</script>
+	</head>
+	<body>
+		<form name="itemform">
+			<input type="text" name="desc" required>
+			<input type="number" name="price" min="0" max="9999" required>
+			<button>Save</button>
+		</form>
+	</body>
+</html>

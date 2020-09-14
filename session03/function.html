@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Call function</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			div.box {
+				width: 200px;
+				height: 200px;
+				border: solid black thin;
+			}
+
+			.yellow {
+				background-color: yellow;
+			}
+		</style>
+		<script type="text/javascript">
+
+			var togglecolor = function(e){
+				e.target.classList.toggle('yellow');
+			};
+
+			var submitform = function(e){
+				e.preventDefault();
+				console.log(e.target.title.value);
+				e.target.reset();
+			};
+
+			document.addEventListener('DOMContentLoaded', e => {
+				console.log('document loaded');
+
+				document.links[0].addEventListener('click', e => {
+					e.preventDefault();
+					console.log(e.target.href);
+					console.log(e.target.attributes['href'].value);
+				});
+
+				var box1 = document.getElementById('box1');
+				console.log(box1);
+
+				box1.addEventListener('mouseenter', togglecolor);
+				box1.addEventListener('mouseleave', togglecolor);
+
+				document.forms.test.addEventListener('submit', submitform);
+			});
+		</script>
+	</head>
+	<body>
+		<p><a href="/">Link</a></p>
+		<div id="box1" class="box"></div>
+		<form name="test">
+			<input type="text" name="title" required>
+			<button>Post</button>
+		</form>
+	</body>
+</html>
