@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Basic events</title>
+		<meta charset="utf-8" />
+		<script>
+			var list_elm, newitem_btn, startauto_btn;
+
+			var createnewitem = e => {
+				var li = document.createElement('li');
+				li.innerHTML = 'Item';
+				list_elm.appendChild(li);
+			};
+
+			var autoClick = () => {
+				console.log('now!');
+				var event = new Event('click', {bubbles:true});
+				newitem_btn.dispatchEvent(event);
+			};
+
+			var startauto = e => {
+				var interval = setInterval(autoClick, 1000);
+			};
+
+			document.addEventListener('DOMContentLoaded', e => {
+				list_elm = document.querySelector('#list1');
+				newitem_btn = document.querySelector('#newItemBtn');
+				startauto_btn = document.querySelector('#startAutoBtn');
+
+				newitem_btn.addEventListener('click', createnewitem);
+				startauto_btn.addEventListener('click', startauto);
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Event</h1>
+		<div>
+			<button id="newItemBtn">New item</button>
+			<button id="startAutoBtn">Start auto</button>
+		</div>
+		<div>Number of items: <span id="numOfItems">0</span></div>
+		<ul id="list1"></ul>
+	</body>
+</html>

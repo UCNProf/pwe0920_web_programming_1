@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tabs</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			div#content div {
+				display: none;
+			}
+			div#content div.current {
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', e => {
+				var menu_elm = document.querySelector('ul#menu');
+				var content_elm = document.querySelector('div#content');
+
+				menu_elm.addEventListener('click', e => {
+					e.preventDefault();
+					if(e.target.nodeName == 'A'){
+						content_elm.querySelectorAll(`div.current`).forEach(elm => {
+							elm.classList.remove('current');
+						});
+
+						var id = e.target.attributes['href'].value;
+						var page_elm = content_elm.querySelector(`div#${id}`);
+						page_elm.classList.add('current');
+					}
+				});
+
+			});
+		</script>
+	</head>
+	<body>
+		<ul id="menu">
+			<li><a href="page1">Page 1</a></li>
+			<li><a href="page2">Page 2</a></li>
+			<li><a href="page3">Page 3</a></li>
+		</ul>
+		<div id="content">
+			<div id="page1">
+				<p>Content of page 1</p>
+			</div>
+			<div id="page2">
+				<p>Content of page 2</p>
+			</div>
+			<div id="page3">
+				<p>Content of page 3</p>
+			</div>
+		</div>
+	</body>
+</html>

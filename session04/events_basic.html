@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Basic events</title>
+		<meta charset="utf-8" />
+		<script>
+			document.addEventListener('DOMContentLoaded', e => {
+				var p_elm = document.querySelector('p');
+				var div_elm = document.querySelector('div');
+
+				e.target.addEventListener('click', e => {
+					console.log('doc clicked');
+				}, true);
+
+				p_elm.addEventListener('click', e => {
+					console.log('p clicked');
+				}, true);
+
+				div_elm.addEventListener('click', e => {
+					console.log('div clicked');
+				}, false);
+			});
+		</script>
+	</head>
+	<body>
+		<div>
+			<p>Click me!</p>
+		</div>
+	</body>
+</html>
