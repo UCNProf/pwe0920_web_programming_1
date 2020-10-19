@@ -1,0 +1,14 @@
+-var menu = [{"href":"/", "title":"Home"},{"href":"/blog", "title":"Blog"}];
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      ul
+        each item in menu
+          li
+            a(href=item.href)= item.title
+    main
+      block content
