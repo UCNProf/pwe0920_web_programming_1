@@ -24,12 +24,20 @@ router.post('/login', function(req, res, next) {
 	var password = req.body.password;
 
 	User.findOne(username, user => {
-		console.log(user);
-		//if(user.validPassword(password)){
-			req.session.userid = user.id;
-		//}
+		if(user){// if a user with this username
+			if(user.validPassword(password)){ // if password is valid
+				// login is OK and we can set the userid in the session
+				req.session.userid = user.id;
+				res.redirect('/');
+			}else{
+				// login fails and user must try again
+	  			res.render('index/login', {title: 'Website01'});
+			}
+		}else{
+			// login fails and user must try again
+	  		res.render('index/login', {title: 'Website01'});
+		}
 	});
-  res.render('index/login', {title: 'Website01'});
 });
 
 module.exports = router;
