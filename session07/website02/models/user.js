@@ -1,21 +1,18 @@
 var {SHA256} = require("sha2");
 
 module.exports = {
-	findOne: (username, callback) => {
-		db.query('SELECT * FROM users WHERE name = ?', [username], (error, results, fields) => {
-			if (error) throw error;
-			var res = undefined;
-			if(results.length > 0) {
-				res = new User(results[0]);
-			}
-			return callback(res);
-		});
+	findOne: async (username, callback) => {
+		var user = await db.collection('users').findOne({name: username});
+		console.log(user);
+		var userobj = new User(user);
+
+		return callback(userobj);
 	}
 };
 
 class User {
 	constructor(data){
-		this.id = data.id;
+		this.id = data._id;
 		this.name = data.name;
 		this.password = data.password;
 	}

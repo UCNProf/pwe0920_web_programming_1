@@ -12,15 +12,13 @@ module.exports = {
 			return callback(posts);
 		});
 	},
-	postById: (id, callback) => {
+	postById: async (id, callback) => {
 		var objid = new ObjectId(id);
+		var post = await db.collection('posts').findOne({_id: objid});
 
-		db.collection('posts').find({_id: objid}).toArray((error, results) => {
-			if(error) throw error;
+		var postobj = new Post(post);
 
-			var post = new Post(results[0]);
-			return callback(post);
-		});
+		return callback(postobj);
 	}
 };
 
