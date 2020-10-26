@@ -10,8 +10,8 @@ db.createUser({
 
 // create two new user documents as variables
 db.createCollection("users");
-var u1 = db.users.insertOne({name:"admin", password: ""});
-var u2 = db.users.insertOne({name:"chwa", password: ""});
+var u1 = db.users.insertOne({name:"admin", password: "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"});
+var u2 = db.users.insertOne({name:"chwa", password: "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"});
 
 // create three new post documents with reference to u1 and u2
 db.createCollection("posts");
