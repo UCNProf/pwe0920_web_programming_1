@@ -19,6 +19,16 @@ module.exports = {
 		var postobj = new Post(post);
 
 		return callback(postobj);
+	},
+	find: async (query, callback) => {
+		var results = await db.collection('posts').find(query);
+
+		var posts = [];
+
+		await results.forEach(res_obj => {
+			posts.push(new Post(res_obj));
+		});
+		return callback(posts);
 	}
 };
 

@@ -24,4 +24,3 @@ class User {
 		return (password_str == this.password) ? true : false;
 	}
 }
-

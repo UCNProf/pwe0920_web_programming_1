@@ -17,7 +17,7 @@ app.set('view engine', 'pug');
 
 
 //global.db = db;
-MongoClient.connect('mongodb://website02:eLow8yBSp34wXx@127.0.0.1:27017/website02?w=majority', (err, client) => {
+MongoClient.connect('mongodb://website02:eLow8yBSp34wXx@127.0.0.1:27017/website02?w=majority', { useUnifiedTopology: true }, (err, client) => {
   if (err) throw err;
   global.db = client.db('website02');
 });

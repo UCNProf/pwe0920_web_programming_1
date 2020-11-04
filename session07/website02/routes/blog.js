@@ -4,12 +4,15 @@ var Post = require('../models/post.js');
 
 /* GET blog posts. */
 router.get('/', function(req, res, next) {
-	/*var q = req.query.q;
-	console.log(q);
-	var qstr = '';
-	if (q) qstr = " WHERE title LIKE '%"+q+"%'";*/
+	var q = req.query.q;
+	var qobj = {};
+	var exp = new RegExp(q, 'i');
 
-	Post.all(posts => {
+	// if q is in the querystring and has a value, then add
+	// the regex to title if q=test => qobj = {title: /test/i}
+	if (q) qobj.title = exp;
+
+	Post.find(qobj, posts => {
 		res.render('blog/index', { title: "Blog", posts: posts});
 	});
 });
