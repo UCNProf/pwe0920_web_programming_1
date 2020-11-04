@@ -1,0 +1,16 @@
+extends ../layout
+
+block head
+  script(src="/javascripts/posts.js")
+
+block content
+  h1= title
+  form(name="search")
+    input(type="text", name="q")
+    button Search
+  ul(id="posts")
+  form(name="editor")
+    input(type="hidden", name="id")
+    input(type="text",name="title")
+    textarea(name="content")
+    button Save

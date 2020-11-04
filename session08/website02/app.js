@@ -9,6 +9,8 @@ const MongoStore = require('connect-mongo')(session);
 
 var indexRouter = require('./routes/index');
 var blogRouter = require('./routes/blog');
+var dashboardRouter = require('./routes/dashboard');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -41,8 +43,27 @@ app.use(session({
   store: sessionStore
 }));
 
+function restrict(req, res, next){
+  if(req.session.userid){
+    next();
+  }else{
+    res.redirect('/login');
+  }
+}
+
+function restrictapi(req, res, next){
+  if(req.session.userid){
+    next();
+  }else{
+    res.status(401);
+    res.json({error:"Unauthorized"});
+  }
+}
+
 app.use('/', indexRouter);
 app.use('/blog', blogRouter);
+app.use('/dashboard', restrict, dashboardRouter);
+app.use('/api', restrictapi, apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

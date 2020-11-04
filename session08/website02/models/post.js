@@ -29,6 +29,13 @@ module.exports = {
 			posts.push(new Post(res_obj));
 		});
 		return callback(posts);
+	},
+	findOne: async (query, callback) => {
+		var result = await db.collection('posts').findOne(query);
+
+		var post = (result) ? new Post(result) : result;
+
+		return callback(post);
 	}
 };
 

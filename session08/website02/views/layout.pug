@@ -9,6 +9,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    block head
+    
   body
     header
       ul
@@ -17,7 +19,7 @@ html
       ul
         if(user)
           +menuitem("/logout", "Logout")
-          +menuitem("/profile", "Profile")
+          +menuitem("/dashboard", "Dashboard")
         else
           +menuitem("/login", "Login")
 

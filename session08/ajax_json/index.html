@@ -16,9 +16,11 @@
 
 			var onusersclicked = e => {
 				e.preventDefault();
-				let id = e.target.getAttribute('href');
-				let userObj = usersArr.find(user => { return user.id == id});
-				contentElm.innerHTML = `<p>Id: ${userObj.id}</p><p>Name: ${userObj.name}</p>`;
+				if(e.target.nodeName == 'A'){
+					let id = e.target.getAttribute('href');
+					let userObj = usersArr.find(user => { return user.id == id});
+					contentElm.innerHTML = `<p>Id: ${userObj.id}</p><p>Name: ${userObj.name}</p>`;
+				}
 			};
 
 
