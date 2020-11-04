@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AJAX 101</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript">
+			var contentElm, usersElm;
+			var usersArr = [];
+			
+			var updateList = users => {
+				usersElm.innerHTML = '';
+				users.forEach(user => {
+					usersElm.innerHTML += `<li><a href="${user.id}">${user.name}</a></li>`;
+				});
+			};
+
+			var onusersclicked = e => {
+				e.preventDefault();
+				let id = e.target.getAttribute('href');
+				let userObj = usersArr.find(user => { return user.id == id});
+				contentElm.innerHTML = `<p>Id: ${userObj.id}</p><p>Name: ${userObj.name}</p>`;
+			};
+
+
+			document.addEventListener('DOMContentLoaded', e => {
+				contentElm = document.querySelector('div#content');
+				usersElm = document.querySelector('ul#users');
+
+				usersElm.addEventListener('click', onusersclicked);
+
+				fetch('users.json').then(response => {
+					return response.json();
+				}).then(users => {
+					usersArr = users;
+					updateList(users);
+				});
+
+			});
+		</script>
+	</head>
+	<body>
+		<ul id="users"></ul>
+		<div id="content"></div>
+	</body>
+</html>

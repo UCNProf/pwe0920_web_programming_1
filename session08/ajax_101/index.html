@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AJAX 101</title>
+		<meta charset="utf-8" />
+		<script type="text/javascript">
+			var contentElm;
+
+			var updatePage = async id => {
+				let url = `page${id}.html`;
+				let response = await fetch(url);
+				let content = await response.text();
+				contentElm.innerHTML = content;
+			};
+
+			var onhashchange = e => {
+				let id = window.location.hash.substring(1);
+				updatePage(id);
+			};
+
+			document.addEventListener('DOMContentLoaded', e => {
+				contentElm = document.querySelector('div#content');
+
+				document.addEventListener('hashchange', onhashchange, false);
+
+				let id = window.location.hash.substring(1);
+				if(id) {
+					updatePage(id);
+				} else {
+					window.location.hash = '#1';
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li><a href="#1">Page 1</a></li>
+			<li><a href="#2">Page 2</a></li>
+		</ul>
+		<div id="content"></div>
+	</body>
+</html>

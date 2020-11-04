@@ -1,0 +1,25 @@
+-var menu = [{"href":"/", "title":"Home"},{"href":"/blog", "title":"Blog"}];
+
+mixin menuitem(url, title)
+  li
+    a(href=url)= title
+
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      ul
+        each item in menu
+          +menuitem(item.href, item.title)
+      ul
+        if(user)
+          +menuitem("/logout", "Logout")
+          +menuitem("/profile", "Profile")
+        else
+          +menuitem("/login", "Login")
+
+    main
+      block content
