@@ -1,0 +1,13 @@
+form[name='editor'] {
+	display: flex;
+	flex-direction: column;
+}
+
+form[name='editor'] input {
+	border: thin solid gray;
+}
+
+form[name='editor'] textarea {
+	border: thin solid gray;
+	
+}
