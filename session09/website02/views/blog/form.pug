@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+  form(name="post", method="post", action="/blog")
+    input(type="text", name="title")
+    textarea(name="content")
+    button Save
