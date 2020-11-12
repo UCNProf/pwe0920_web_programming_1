@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../models/post.js');
+var ObjectId = require('mongodb').ObjectId; 
 
 /* GET blog posts. */
 router.get('/', function(req, res, next) {
@@ -30,22 +31,25 @@ router.get('/:id', function(req, res, next) {
 	});
 });
 
-/*router.post('/', function(req, res, next) {
-	var title = req.body.title;
-	var content = req.body.content;
-	console.log(title + ' -- ' + content);
-	var user_id = 1;
-	if(title && content){
-		db.query('INSERT INTO posts (date, user_id, title, content) VALUES (NOW(), ?, ?, ?)', [user_id, title, content], (error, results, fields) => {
-			if(error) throw error;
-			db.query('SELECT * FROM posts ORDER BY date DESC', (error, results, fields) => {
-				if(error) throw error;
-				res.render('blog/index', { title: "Blog", posts: results});
+router.post('/', function(req, res, next) {
+	var qobj = {};
+
+	if(req.session.userid) {
+		var post = {
+			title: req.body.title,
+			content: req.body.content,
+			user_id: ObjectId(req.session.userid)
+		};
+		Post.insertOne(post, insertedId => {
+			Post.find(qobj, posts => {
+				res.render('blog/index', { title: "Blog", posts: posts, user: req.session.userid});
 			});
 		});
 	}else{
-		res.send('no title og content found');
+		Post.find(qobj, posts => {
+			res.render('blog/index', { title: "Blog", posts: posts, user: req.session.userid});
+		});
 	}
-});*/
+});
 
 module.exports = router;

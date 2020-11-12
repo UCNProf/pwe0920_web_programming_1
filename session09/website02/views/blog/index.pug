@@ -2,6 +2,9 @@ extends ../layout
 
 block content
   h1= title
+  if user
+    p
+      a(href="/blog/new") New post
   form(name="search")
     input(type="text", name="q")
     button Search

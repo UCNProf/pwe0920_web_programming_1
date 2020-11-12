@@ -85,6 +85,19 @@ var updateEditor = e => {
 	editorElm.content.value = post.content;
 };
 
+var displaymessage = e => {
+	var message = '';
+	switch(e.type){
+		case 'putpost':
+			message += 'Post was updated';
+			break;
+		default:
+			message += 'Default';
+			break;
+	}
+	alert(message);
+};
+
 document.addEventListener('DOMContentLoaded', e => {
 	postsElm = document.querySelector('ul#posts');
 	editorElm = document.forms.editor;
@@ -95,6 +108,7 @@ document.addEventListener('DOMContentLoaded', e => {
 	document.addEventListener('getposts', updateList);
 	document.addEventListener('getpost', updateEditor);
 	document.addEventListener('putpost', updateListPut);
+	document.addEventListener('putpost', displaymessage);
 	document.addEventListener('postpost', updateListPost);
 	document.addEventListener('deletepost', updateListDelete);
 
