@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web Components 01</title>
+		<meta charset="utf-8"/>
+		<script type="text/javascript">
+			class MessageBox extends HTMLElement {
+				constructor(){
+					super();
+					this.attachShadow({mode: 'open'});
+
+					var text = this.getAttribute('text') || 'Default text';
+					var bgcolor = this.getAttribute('bgcolor') || 'gray';
+
+					var style = document.createElement('style');
+					style.innerHTML = `
+						div {
+							background: ${bgcolor};
+							padding:.5em;
+							margin: .5em;
+						}
+					`;
+					this.shadowRoot.append(style);
+
+					this.shadowRoot.innerHTML += `<div>${text}</div>`;
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', e => {
+				customElements.define('message-box', MessageBox);
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Web Components 01</h1>
+		<message-box text="Display message!" bgcolor="lightblue"></message-box>
+		<message-box text="Hello World!"></message-box>
+		<div>Text</div>
+	</body>
+</html>
