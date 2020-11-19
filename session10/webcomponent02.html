@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Web Components 02</title>
+		<meta charset="utf-8"/>
+		<script type="text/javascript">
+			class FancyArticle extends HTMLElement {
+				constructor(){
+					super();
+					this.attachShadow({mode: 'open'});
+
+					var style = document.createElement('style');
+					style.innerHTML = `
+						:host {
+							margin: .5em;
+							border: dotted forestgreen;
+							border-width: thick;
+						}
+						header {
+							padding: .5em;
+						}
+						::slotted(h2) {
+							color: Tomato;
+							margin: 0;
+						}
+						::slotted(section) {
+							margin: 1em;
+						}
+					`;
+					this.shadowRoot.append(style);
+
+					var template = document.getElementById('article-template').content;
+					this.shadowRoot.appendChild(template.cloneNode(true));
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', e => {
+				customElements.define('fancy-article', FancyArticle, {extends: 'article'});
+			});
+		</script>
+		<template id="article-template">
+			<header>
+				<slot name="title">No title</slot>
+			</header>
+			<slot name="content">No content</slot>
+		</template>
+	</head>
+	<body>
+		<h1>Web Components 02</h1>
+		<article is="fancy-article">
+			<h2 slot="title">Title of article</h2>
+			<section slot="content">
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+			</section>
+		</article>
+	</body>
+</html>
