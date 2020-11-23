@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Video</title>
+		<style>
+			
+			body {
+				width: 600px;
+				margin: 0 auto;
+			}
+			.videoPlayer video {
+				position: relative;
+			}
+			
+			.videoPlayer {
+				position: relative;
+				overflow: hidden;
+				display: inline-block;
+				padding: 0 0 10px 0;
+			}
+			
+			.controls {
+				position: absolute;
+				bottom: 0px;
+				left: 10px;
+			}
+			
+			.videoPlayer a {
+				left: -150px;
+			}
+			
+			.videoPlayer:hover a {
+				left: 0px;
+			}
+			
+			.controls a {
+				height: 50px;
+				width: 50px;
+				display: inline-block;
+				cursor: pointer;
+				color: transparent;
+				background-image: url("controls.png");
+				background-position: 0 0;
+				background-repeat: no-repeat;
+				position: relative;
+				transition: left 1s ease;
+			}
+			
+			a.play {
+				background-position: 0 0;
+			}
+			
+			a.pause {
+				background-position: -50px 0;
+			}
+			
+			a.stop {
+				background-position: -100px 0;
+			}
+		</style>
+		<script>
+			var videoPlayers = [];
+			
+			var Player = function(elm) {
+				this.video = elm.querySelector('video');
+				this.btnPlay = elm.querySelector('.play');
+				this.btnPlay.addEventListener('click', e => {
+					if (!this.video.paused) {
+						this.pause();
+					} else {
+						this.play();
+					}
+				}, false);
+				this.btnStop = elm.querySelector('.stop');
+				this.btnStop.addEventListener('click', e => {
+					this.stop();
+				}, false);
+			
+				this.play = () => {
+					this.video.play();
+					this.btnPlay.className = 'pause';
+				};
+				
+				this.pause = () => {
+					this.video.pause();
+					this.btnPlay.className = 'play';
+				};
+				
+				this.stop = () => {
+					this.pause();
+					this.video.currentTime = 0;
+				};
+			}
+
+			var stopall = e => {
+				e.preventDefault();
+				videoPlayers.forEach(player => {
+					player.stop();
+				});
+			}
+			
+			document.addEventListener('DOMContentLoaded', e => {
+				document.querySelector('#stopall').addEventListener('click', stopall, false);
+
+				document.querySelectorAll('div.videoPlayer').forEach(player => {
+					videoPlayers.push(new Player(player));
+				});
+			}, false);
+			
+			
+		</script>
+	</head>
+	<body>
+		<h1>Video element</h1>
+		<p><a id="stopall" href="#">Stop all</a></p>
+		<div class="videoPlayer">
+			<video width="384" height="288">
+				<source src="TheNewSpirit.webm"/>
+				<source src="TheNewSpirit.ogg"/>
+				<source src="TheNewSpirit.mp4"/>
+			</video>
+			<div class="controls">
+				<a id="btnPlay" class="play"></a>
+				<a id="btnStop" class="stop"></a>
+			</div>
+		</div>
+		<div class="videoPlayer">
+			<video width="384" height="288">
+				<source src="TheNewSpirit.webm"/>
+				<source src="TheNewSpirit.ogg"/>
+				<source src="TheNewSpirit.mp4"/>
+			</video>
+			<div class="controls">
+				<a id="btnPlay" class="play"></a>
+				<a id="btnStop" class="stop"></a>
+			</div>
+		</div>
+	</body>
+</html>

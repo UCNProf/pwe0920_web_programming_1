@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8 />
+		<title>Video</title>
+		<script>
+			var btnPlay;
+			var video;
+			var ctrPlay = e => {
+				e.preventDefault();
+				if (!video.paused) {
+					video.pause();
+					btnPlay.innerText = 'Play';
+				} else {
+					video.play();
+					btnPlay.innerText = 'Pause';
+				}
+			};
+
+			document.addEventListener('DOMContentLoaded', e => {
+				video = document.querySelector("#video");
+				btnPlay = document.querySelector("#btnPlay");
+
+				btnPlay.addEventListener('click', ctrPlay, false)
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Video element</h1>
+		<video id="video" width="384" height="288">
+			<source src="TheNewSpirit.webm"/>
+			<source src="TheNewSpirit.ogg"/>
+			<source src="TheNewSpirit.mp4"/>
+		</video>
+		<div>
+			<a id="btnPlay" href="#">Play</a>
+		</div>
+	</body>
+</html>
